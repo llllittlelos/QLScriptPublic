@@ -13,8 +13,8 @@
 const {
     Env
 } = require("../tools/env")
-const $ = new Env("babycare");
-let ckName = `babycare`;
+const $ = new Env("益禾堂");
+let ckName = `yht`;
 const strSplitor = "#";
 
 const axios = require("axios");
@@ -70,7 +70,6 @@ class Task {
         let {
             data: result
         } = await axios.request(options);
-        console.log(result);
         if (result.data && result.status) {
             return result.data
 
