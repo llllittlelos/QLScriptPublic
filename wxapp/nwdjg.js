@@ -50,7 +50,7 @@ class Task {
         await wechat.init(this.wcsid)
         let { data: codeRes } = await wechat.getCode(this.wcsid)
         if (codeRes.status) {
-            await this.getUserToken(codeRes.data)
+            await this.getUserToken(codeRes.data.code)
         }
         if (!this.token) {
             $.log(`账号[${this.index}] 获取用户Token失败❌`)
