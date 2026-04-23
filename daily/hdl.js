@@ -159,7 +159,7 @@ class Task {
 }
 
 !(async () => {
-    await getNotice()
+    // await getNotice()
     $.checkEnv(ckName);
 
     for (let user of $.userList) {
