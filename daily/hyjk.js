@@ -621,7 +621,7 @@ class Task {
 }
 
 !(async () => {
-    await getNotice().catch(e => $.log(`[Notice失败] ${e.message}`))
+    // await getNotice().catch(e => $.log(`[Notice失败] ${e.message}`))
     $.checkEnv(ckName);
 
     for (let user of $.userList) {
