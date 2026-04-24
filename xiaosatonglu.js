@@ -6,7 +6,7 @@
  * 变量值:
 
  */
-
+global.self = global;
 const $ = new Env("潇洒桐庐");
 const notify = $.isNode() ? require("./sendNotify") : "";
 let ckName = "xiaosa";
