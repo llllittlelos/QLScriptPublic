@@ -266,6 +266,29 @@ class UserInfo {
     }
     //
 
+    // async art_list(channelId) {
+    //     try {
+    //         let options = {
+    //             fn: "文章列表",
+    //             method: "get",
+    //             url: `https://wxapi.hoolo.tv/event/dtqp/index.php?s=/home/TmApi/channelList&channelId=${channelId}&userId=${this.accountId}&sessionId=${this.sessionId}`,
+    //             headers: this.get_headers(),
+    //         };
+    //         //console.log(options);
+    //         let { body: result } = await httpRequest(options);
+    //         //console.log(options);
+    //         //console.log(result);
+    //         result = JSON.parse(result);
+    //         //console.log(result);
+    //         for (let art of result) {
+    //             //console.log(art.id)
+    //             this.artList.push(art.id)
+    //         }
+
+    //     } catch (e) {
+    //         console.log(e);
+    //     }
+    // }
     async art_list(channelId) {
         try {
             let options = {
@@ -274,14 +297,22 @@ class UserInfo {
                 url: `https://wxapi.hoolo.tv/event/dtqp/index.php?s=/home/TmApi/channelList&channelId=${channelId}&userId=${this.accountId}&sessionId=${this.sessionId}`,
                 headers: this.get_headers(),
             };
-            //console.log(options);
             let { body: result } = await httpRequest(options);
-            //console.log(options);
-            //console.log(result);
-            result = JSON.parse(result);
-            //console.log(result);
+            
+            // ====== 修改这里：增加防空和防御性解析 ======
+            if (!result) {
+                console.log(`❌ [${options.fn}] 服务器返回数据为空，可能接口失效或超时`);
+                return;
+            }
+            try {
+                result = JSON.parse(result);
+            } catch (jsonErr) {
+                console.log(`❌ [${options.fn}] 解析 JSON 失败，返回值可能不是JSON。返回值内容：${result}`);
+                return;
+            }
+            // ==========================================
+
             for (let art of result) {
-                //console.log(art.id)
                 this.artList.push(art.id)
             }
 
